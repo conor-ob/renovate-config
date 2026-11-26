@@ -1,0 +1,5 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "A cron schedule with minutes, which Renovate doesn't support.",
+  "schedule": ["0 6 * * 1"]
+}

@@ -1,0 +1,7 @@
+# re2 builds the regex engine Renovate uses, so the validator checks regexes
+# the way Renovate runs them. The other install scripts aren't needed.
+allowBuilds:
+  core-js-pure: false
+  dtrace-provider: false
+  protobufjs: false
+  re2: true

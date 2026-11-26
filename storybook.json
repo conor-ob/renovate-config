@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Storybook. Every storybook package arrives in one PR, matched by name so none is missed by source-repo matching. Extend after default.",
+  "packageRules": [
+    {
+      "description": "Storybook and its addons are a Lockstep set.",
+      "matchPackageNames": [
+        "storybook",
+        "@storybook/*",
+        "eslint-plugin-storybook",
+        "@chromatic-com/storybook"
+      ],
+      "groupName": "storybook"
+    }
+  ]
+}
