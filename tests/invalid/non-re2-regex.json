@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "A lookahead, which RE2 doesn't support, in a regex manager.",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)pnpm-workspace\\.yaml$/"],
+      "matchStrings": ["npm:@voidzero-dev/vite-plus-core@(?=\\d)(?<currentValue>\\S+)"],
+      "depNameTemplate": "@voidzero-dev/vite-plus-core",
+      "datasourceTemplate": "npm"
+    }
+  ]
+}

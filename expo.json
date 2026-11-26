@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Expo apps. Patches within the SDK auto-merge, SDK upgrades wait on the Dependency Dashboard, and the packages the SDK pins never move on their own. Guard: expo install --check in CI. Extend after default.",
+  "packageRules": [
+    {
+      "description": "Look up patches apart from minors, so a package with a newer minor, such as expo-router 5.1, still gets its latest patch in the SDK, such as 5.0.7.",
+      "matchPackageNames": ["expo", "expo-*", "@expo/*", "react-native-*"],
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Expo and React Native patches share one PR and auto-merge. Guard: CI's expo install --check.",
+      "matchPackageNames": ["expo", "expo-*", "@expo/*", "react-native-*"],
+      "matchUpdateTypes": ["patch"],
+      "groupName": "expo",
+      "automerge": true
+    },
+    {
+      "description": "Expo and React Native minors and majors aren't offered as PRs. They move with an SDK upgrade, done with npx expo install --fix.",
+      "matchPackageNames": ["expo", "expo-*", "@expo/*", "react-native-*"],
+      "matchUpdateTypes": ["minor", "major"],
+      "enabled": false
+    },
+    {
+      "description": "An Expo SDK major waits on the Dependency Dashboard for approval. Upgrade it by hand or with an agent, using npx expo install --fix.",
+      "matchPackageNames": ["expo"],
+      "matchUpdateTypes": ["major"],
+      "enabled": true,
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Packages the SDK pins to an exact version only move with an SDK upgrade.",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "react-native",
+        "@shopify/flash-list",
+        "@react-native-async-storage/async-storage",
+        "react-native-reanimated",
+        "react-native-worklets"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "TypeScript majors only move with an SDK upgrade.",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
+}

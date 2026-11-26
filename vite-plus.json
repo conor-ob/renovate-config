@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "vite-plus. vite-plus, its core and the vite npm: alias move as one PR. Guard: each repo fails CI when the lockfile holds more than one core version. Extend after default.",
+  "packageRules": [
+    {
+      "description": "vite-plus and its core are a Lockstep set. The core is numbered after the Vite it bundles, so a vite-plus minor comes with a core major. One PR for every update type, with one 7-day cooldown. A PR holding a major is merged by hand, because Renovate auto-merges a group only when every update in it qualifies. Renovate's npm manager reads the vite: npm:@voidzero-dev/vite-plus-core@<version> alias in pnpm-workspace.yaml with the core as its package name, so this rule takes the alias too.",
+      "matchPackageNames": ["vite-plus", "@voidzero-dev/vite-plus-core"],
+      "groupName": "vite-plus",
+      "separateMajorMinor": false,
+      "minimumReleaseAge": "7 days"
+    }
+  ]
+}

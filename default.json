@@ -1,0 +1,96 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Baseline for every conor-ob repo. Each rule gives its reason in its description.",
+  "extends": ["config:best-practices", ":enableVulnerabilityAlerts"],
+  "timezone": "Europe/Dublin",
+  "schedule": ["* 0-8 * * 1"],
+  "automergeSchedule": ["at any time"],
+  "rangeStrategy": "bump",
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 10,
+  "dependencyDashboard": { "enabled": true },
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "deps",
+  "lockFileMaintenance": {
+    "description": "Monthly, on the first Monday, instead of config:best-practices' weekly refresh.",
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["* 0-8 1-7 * 1"]
+  },
+  "packageRules": [
+    {
+      "description": "Dev dependencies keep ranges and bump them, overriding config:best-practices' :pinDevDependencies.",
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Cooldown: 7 days for every update. Replaces config:best-practices' 3-day npm wait.",
+      "matchPackageNames": ["*"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "description": "Cooldown: 30 days for majors.",
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "30 days"
+    },
+    {
+      "description": "Commit prefix chore for every dependency, overriding config:recommended's fix for production dependencies.",
+      "matchPackageNames": ["*"],
+      "semanticCommitType": "chore"
+    },
+    {
+      "description": "Commit prefix ci for GitHub Actions.",
+      "matchManagers": ["github-actions"],
+      "semanticCommitType": "ci"
+    },
+    {
+      "description": "Commit prefix build for Docker and compose images.",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "semanticCommitType": "build"
+    },
+    {
+      "description": "Minor and patch updates share one weekly PR. The next two rules split out GitHub Actions and Docker, so each PR has one commit prefix. Majors keep their own PRs, including Renovate's built-in groups.",
+      "matchPackageNames": ["*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "minor and patch",
+      "groupSlug": "minor-and-patch"
+    },
+    {
+      "description": "GitHub Actions minor, patch and digest updates share one weekly PR. Majors keep their own PRs.",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "groupName": "github-actions"
+    },
+    {
+      "description": "Docker and compose minor, patch and digest updates share one weekly PR. Majors keep their own PRs.",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "groupName": "docker"
+    },
+    {
+      "description": "Auto-merge minor, patch and digest updates once protect-main's required checks pass. Majors are merged by hand.",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "automerge": true
+    },
+    {
+      "description": "Node group: the node Docker image, .nvmrc, engines.node and @types/node move as one PR, with commit prefix chore. Node versioning offers a new major only once it reaches LTS. Comes after the other groups so it takes node out of them.",
+      "matchDepNames": ["node", "@types/node"],
+      "groupName": "node",
+      "semanticCommitType": "chore"
+    },
+    {
+      "description": "engines.node changes only in the Node group's major PR, never for a minor or patch release.",
+      "matchDepTypes": ["engines"],
+      "matchDepNames": ["node"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "enabled": false
+    },
+    {
+      "description": "Postgres and Redis majors change the on-disk data format, so they're never offered.",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/(?:^|/)postgres$/", "/(?:^|/)redis$/"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Published libraries. Ranges only widen, engines is never touched, and @types/node stays on the engines minimum. Extend after default.",
+  "rangeStrategy": "auto",
+  "packageRules": [
+    {
+      "description": "Renovate's default range strategy for dev dependencies too, overriding default's bump: peerDependencies and other ranges only widen, so consumers choose their own versions.",
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "auto"
+    },
+    {
+      "description": "engines is a promise to consumers. It only changes by hand, when the library drops a Node version.",
+      "matchDepTypes": ["engines"],
+      "enabled": false
+    },
+    {
+      "description": "@types/node follows the oldest supported Node (the engines minimum), not .nvmrc, so its majors are raised by hand with engines.",
+      "matchPackageNames": ["@types/node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
+}
