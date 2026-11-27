@@ -3,7 +3,7 @@
   "description": "Baseline for every conor-ob repo. Each rule gives its reason in its description.",
   "extends": ["config:best-practices", ":enableVulnerabilityAlerts"],
   "timezone": "Europe/Dublin",
-  "schedule": ["* 0-8 * * 1"],
+  "schedule": ["* 0-8 * * *"],
   "automergeSchedule": ["at any time"],
   "rangeStrategy": "bump",
   "prHourlyLimit": 0,
@@ -49,20 +49,20 @@
       "semanticCommitType": "build"
     },
     {
-      "description": "Minor and patch updates share one weekly PR. The next two rules split out GitHub Actions and Docker, so each PR has one commit prefix. Majors keep their own PRs, including Renovate's built-in groups.",
+      "description": "Minor and patch updates share one PR. The next two rules split out GitHub Actions and Docker, so each PR has one commit prefix. Majors keep their own PRs, including Renovate's built-in groups.",
       "matchPackageNames": ["*"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "minor and patch",
       "groupSlug": "minor-and-patch"
     },
     {
-      "description": "GitHub Actions minor, patch and digest updates share one weekly PR. Majors keep their own PRs.",
+      "description": "GitHub Actions minor, patch and digest updates share one PR. Majors keep their own PRs.",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
       "groupName": "github-actions"
     },
     {
-      "description": "Docker and compose minor, patch and digest updates share one weekly PR. Majors keep their own PRs.",
+      "description": "Docker and compose minor, patch and digest updates share one PR. Majors keep their own PRs.",
       "matchManagers": ["dockerfile", "docker-compose"],
       "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
       "groupName": "docker"
