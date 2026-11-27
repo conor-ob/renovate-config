@@ -86,6 +86,11 @@
       "enabled": false
     },
     {
+      "description": ".nvmrc holds only the Node major, so it changes only in the Node group's major PR. Overrides rangeStrategy bump, which would rewrite 24 to the full version.",
+      "matchManagers": ["nvm"],
+      "rangeStrategy": "replace"
+    },
+    {
       "description": "Postgres and Redis majors change the on-disk data format, so they're never offered.",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["/(?:^|/)postgres$/", "/(?:^|/)redis$/"],
