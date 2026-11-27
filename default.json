@@ -86,7 +86,7 @@
       "enabled": false
     },
     {
-      "description": ".nvmrc holds only the Node major (hq's Node version baseline), so it changes only in the Node group's major PR. Overrides rangeStrategy bump, which would rewrite 24 to the full version.",
+      "description": ".nvmrc holds only the Node major, so it changes only in the Node group's major PR. Overrides rangeStrategy bump, which would rewrite 24 to the full version.",
       "matchManagers": ["nvm"],
       "rangeStrategy": "replace"
     },
