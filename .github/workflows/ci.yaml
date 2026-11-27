@@ -1,38 +1,82 @@
-name: CI
+name: ⚡️ CI
 
 on:
-  pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
 
 # PR runs share a group per branch, so a new push cancels the stale run.
-# Each main commit gets its own group, so no main run is ever cancelled.
+# Each main commit gets its own group, so no main run is ever cancelled:
+# GitHub keeps one waiting run per group and cancels it when another queues,
+# and a cancelled run on main would leave that commit unchecked
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+# Every job must be listed in the gate job's needs:, or it can fail and the PR
+# still merges
 jobs:
-  validate:
-    name: Validate presets
+  presets:
+    name: 🔧 Presets
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - name: Install node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
       - name: Validate every preset, and check that each config in tests/invalid is rejected
         run: pnpm validate
 
   workflows:
-    name: Lint the GitHub Actions workflows
+    name: 🧾 Workflows
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
       # actionlint, with shellcheck on every `run:` script
-      - uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7 # v2.2.0
+      - name: Actionlint
+        uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7 # v2.2.0
+
+  # The Gate check: the only required status check in protect-main. It runs
+  # even when a job before it failed (a skipped required check counts as
+  # passed), and fails if any needed job failed or was cancelled. A skipped
+  # job counts as fine, so jobs limited to main or to some paths don't block
+  # PRs. always(), not !cancelled(), so a cancelled run leaves it red
+  gate:
+    name: 🚦 Gate
+    needs:
+      - presets
+      - workflows
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # always() here too: a step's default success() would skip it on a
+      # cancelled run, and the gate would pass with nothing checked
+      - name: Check results
+        if: ${{ always() }}
+        run: |
+          jq -r 'to_entries[] | "\(.key): \(.value.result)"' <<<"$NEEDS"
+          jq -e 'all(.[]; .result != "failure" and .result != "cancelled")' <<<"$NEEDS" >/dev/null
+        env:
+          NEEDS: ${{ toJSON(needs) }}
