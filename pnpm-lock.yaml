@@ -176,8 +176,8 @@ importers:
   .:
     devDependencies:
       renovate:
-        specifier: 44.257.5
-        version: 44.257.5(supports-color@7.2.0)(typanion@3.14.0)
+        specifier: 44.257.6
+        version: 44.257.6(supports-color@7.2.0)(typanion@3.14.0)
 
 packages:
 
@@ -314,8 +314,8 @@ packages:
   '@cdktf/hcl2json@0.21.0':
     resolution: {integrity: sha512-cwX3i/mSJI/cRrtqwEPRfawB7pXgNioriSlkvou8LWiCrrcDe9ZtTbAbu8W1tEJQpe1pnX9VEgpzf/BbM7xF8Q==}
 
-  '@containerbase/base@14.68.0':
-    resolution: {integrity: sha512-EweXsQMg5GkLO2jYL/8mhKVx4+8swLyjIr/RKzrOwW0OnbFFeUGbFIi1ICXOcT0uLL9vX5ibKfblIOcXok246Q==}
+  '@containerbase/base@14.68.3':
+    resolution: {integrity: sha512-PiUE8GjftYvVZ1z+XEhGCDestdOFnpzTk8EQ3wdrH4BvpJ4kXMTsqG4BUIwi1ui9dBDFOq5ICESFNy5PA555NA==}
     engines: {node: '>=24.10.0'}
     peerDependencies:
       zod: ^4.0.0
@@ -435,12 +435,6 @@ packages:
     engines: {node: '>=22.15.0'}
     peerDependencies:
       '@opentelemetry/api': ^1.10.0
-
-  '@opentelemetry/instrumentation@0.301.1':
-    resolution: {integrity: sha512-gKk+ExdRO31HuMf6/iY9JIow2I/qnPqQbu+wnhMXNtl4dPsLEBOWqvK/i08Pv5zCLRHxCYZzKr8s0pfztS+Odg==}
-    engines: {node: '>=22.15.0'}
-    peerDependencies:
-      '@opentelemetry/api': '>=1.10.0 <1.11.0'
 
   '@opentelemetry/instrumentation@0.301.2':
     resolution: {integrity: sha512-14ZUepvK+YiMfhy3Hugh4UuY5THEfVOcsY0+L+DertoVmdh4MTR5H0JvD1IT2jGLKPZiIg+apDCM2CTuGh6UzQ==}
@@ -628,8 +622,8 @@ packages:
       '@opentelemetry/api':
         optional: true
 
-  '@renovatebot/base-image@13.174.2':
-    resolution: {integrity: sha512-uxbA5ocWHj+bsEqv/XA6pCxiavfJU45kH8ZudK7zUyQuUvmVLr5vml1YBgj5c8Uo/YneONYEg+2zKntfgozZRg==}
+  '@renovatebot/base-image@13.174.3':
+    resolution: {integrity: sha512-JyYOEkVzMHlgplXTx5ZFvtNdPNpLkP9cFhLFADhYJ9mRQRfGcKtm3pIeU2jwruWoFleSNNDmCVd7/93YNsH4yg==}
     engines: {node: '>=24.10.0'}
     peerDependencies:
       zod: ^4.0.0
@@ -917,7 +911,6 @@ packages:
 
   bunyan@1.8.15:
     resolution: {integrity: sha512-0tECWShh6wUysgucJcBAoYegf3JJoZWibxdqhTm7OHPeT42qdjkZ29QCMcKwbgU1kiH+auSIasNRXMLWXafXig==}
-    engines: {'0': node >=0.10.0}
     hasBin: true
 
   byte-counter@0.1.0:
@@ -2102,8 +2095,8 @@ packages:
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
-  renovate@44.257.5:
-    resolution: {integrity: sha512-9vgixwPRjEcAIeaDR7N4CgvZ5x/kzkLAIA9TCMSX7ESKKATHW6oH5GTTdrvERw++b5zBGt2JmQK+ZD/fE9Eanw==}
+  renovate@44.257.6:
+    resolution: {integrity: sha512-pPRUKOUQlx5UDL0ISRegEE9pxEahqiVxO0FJDS1DGSSGnb+kGx88BQK81IkU4w1eDJCWk0+7/oC3NLnPSpfSKw==}
     engines: {node: ^24.11.0 || ^26.13.0, pnpm: ^11.0.0}
     hasBin: true
 
@@ -2788,7 +2781,7 @@ snapshots:
     dependencies:
       fs-extra: 11.3.0
 
-  '@containerbase/base@14.68.0(zod@4.6.7)':
+  '@containerbase/base@14.68.3(zod@4.6.7)':
     dependencies:
       semver: 7.8.6
     optionalDependencies:
@@ -2893,7 +2886,7 @@ snapshots:
   '@opentelemetry/instrumentation-bunyan@0.70.0(@opentelemetry/api@1.10.0)(supports-color@7.2.0)':
     dependencies:
       '@opentelemetry/api': 1.10.0
-      '@opentelemetry/instrumentation': 0.301.1(@opentelemetry/api@1.10.0)(supports-color@7.2.0)
+      '@opentelemetry/instrumentation': 0.301.2(@opentelemetry/api@1.10.0)(supports-color@7.2.0)
       '@opentelemetry/semantic-conventions': 1.45.0
     transitivePeerDependencies:
       - supports-color
@@ -2911,17 +2904,9 @@ snapshots:
   '@opentelemetry/instrumentation-redis@0.73.0(@opentelemetry/api@1.10.0)(supports-color@7.2.0)':
     dependencies:
       '@opentelemetry/api': 1.10.0
-      '@opentelemetry/instrumentation': 0.301.1(@opentelemetry/api@1.10.0)(supports-color@7.2.0)
+      '@opentelemetry/instrumentation': 0.301.2(@opentelemetry/api@1.10.0)(supports-color@7.2.0)
       '@opentelemetry/redis-common': 0.39.0
       '@opentelemetry/semantic-conventions': 1.45.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@opentelemetry/instrumentation@0.301.1(@opentelemetry/api@1.10.0)(supports-color@7.2.0)':
-    dependencies:
-      '@opentelemetry/api': 1.10.0
-      import-in-the-middle: 3.7.0
-      require-in-the-middle: 8.0.1(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3113,9 +3098,9 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.10.0
 
-  '@renovatebot/base-image@13.174.2(zod@4.6.7)':
+  '@renovatebot/base-image@13.174.3(zod@4.6.7)':
     dependencies:
-      '@containerbase/base': 14.68.0(zod@4.6.7)
+      '@containerbase/base': 14.68.3(zod@4.6.7)
     optionalDependencies:
       zod: 4.6.7
 
@@ -4835,7 +4820,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@44.257.5(supports-color@7.2.0)(typanion@3.14.0):
+  renovate@44.257.6(supports-color@7.2.0)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.1139.0
       '@aws-sdk/client-ec2': 3.1139.0
@@ -4868,7 +4853,7 @@ snapshots:
       '@pnpm/parse-overrides': 1001.0.4
       '@qnighy/marshal': 0.1.3
       '@redis/client': 6.3.1(@opentelemetry/api@1.10.0)
-      '@renovatebot/base-image': 13.174.2(zod@4.6.7)
+      '@renovatebot/base-image': 13.174.3(zod@4.6.7)
       '@renovatebot/detect-tools': 5.0.0
       '@renovatebot/good-enough-parser': 4.0.3
       '@renovatebot/osv-offline': 4.5.10(supports-color@7.2.0)(zod@4.6.7)
