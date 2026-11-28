@@ -17,6 +17,18 @@
     "automerge": true,
     "schedule": ["* 0-8 1-7 * 1"]
   },
+  "customManagers": [
+    {
+      "description": "engines.node written as a bare major (>=24) moves major to major (>=26), like .nvmrc. The built-in npm manager would write the full version (>=26.13.0). depType engines keeps it under the engines rules here and in library.",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)package\\.json$/"],
+      "matchStrings": ["\"engines\"\\s*:\\s*\\{[^}]*\"node\"\\s*:\\s*\">=(?<currentValue>\\d+)\""],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node",
+      "depTypeTemplate": "engines"
+    }
+  ],
   "packageRules": [
     {
       "description": "Dev dependencies keep ranges and bump them, overriding config:best-practices' :pinDevDependencies.",
@@ -88,6 +100,21 @@
     {
       "description": ".nvmrc holds only the Node major, so it changes only in the Node group's major PR. Overrides rangeStrategy bump, which would rewrite 24 to the full version.",
       "matchManagers": ["nvm"],
+      "rangeStrategy": "replace"
+    },
+    {
+      "description": "A bare-major engines.node (>=24) is updated by the engines.node custom manager instead of the npm manager, so it stays a bare major. Other forms (>=24.1.0) keep the npm manager.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["engines"],
+      "matchDepNames": ["node"],
+      "matchCurrentValue": "/^>=\\d+$/",
+      "enabled": false
+    },
+    {
+      "description": "The engines.node custom manager holds only the major, so it changes 24 to 26 rather than bumping to the full version.",
+      "matchManagers": ["custom.regex"],
+      "matchDepTypes": ["engines"],
+      "matchDepNames": ["node"],
       "rangeStrategy": "replace"
     },
     {
