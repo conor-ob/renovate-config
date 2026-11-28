@@ -10,6 +10,6 @@
     "validate": "sh scripts/validate.sh"
   },
   "devDependencies": {
-    "renovate": "44.257.7"
+    "renovate": "44.257.8"
   }
 }
