@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "vite-plugin-node. Vite and vite-plugin-node majors arrive in one PR. Extend after default.",
+  "packageRules": [
+    {
+      "description": "vite-plugin-node and Vite are a peer-bound Lockstep set: each vite-plugin-node major supports one Vite major (7 needs vite ^7, 8 needs vite ^8), so either major alone fails install under strict peer dependencies. Minors and patches are already grouped by default.",
+      "matchPackageNames": ["vite", "vite-plugin-node"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "vite-plugin-node"
+    }
+  ]
+}

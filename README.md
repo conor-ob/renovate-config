@@ -30,6 +30,7 @@ so each repo picks up a change here on its next Renovate run.
 | `expo` | Expo apps | Expo and React Native patches grouped and auto-merged. Their minors and majors aren't offered. An SDK major waits on the Dashboard for approval. Packages the SDK pins (`react`, `react-native` and some native modules) and `typescript` majors never move on their own. |
 | `storybook` | Storybook users | Every storybook package in one PR. |
 | `vite-plus` | vite-plus users | `vite-plus`, `@voidzero-dev/vite-plus-core` and the `vite: npm:@voidzero-dev/vite-plus-core@…` alias in one PR, majors included, with one 7-day cooldown. |
+| `vite-plugin-node` | vite-plugin-node users | `vite` and `vite-plugin-node` majors in one PR, since each plugin major needs the matching Vite major. |
 | `library` | Published packages | Ranges only widen. `engines` is never touched, and `@types/node` majors are raised by hand. |
 
 Each rule's reason is in its `description`.
