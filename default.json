@@ -3,7 +3,7 @@
   "description": "Baseline for every conor-ob repo. Each rule gives its reason in its description.",
   "extends": ["config:best-practices", ":enableVulnerabilityAlerts"],
   "timezone": "Europe/Dublin",
-  "schedule": ["* 0-8 * * *"],
+  "schedule": ["at any time"],
   "automergeSchedule": ["at any time"],
   "rangeStrategy": "bump",
   "prHourlyLimit": 0,
