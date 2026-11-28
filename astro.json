@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Astro sites. TypeScript majors wait for @astrojs/check. Guard: strict peer dependencies. Extend after default.",
+  "packageRules": [
+    {
+      "description": "TypeScript and @astrojs/check are a peer-bound Lockstep set. TypeScript majors aren't offered until @astrojs/check's peer range allows them (0.9.12 allows ^5.0.0 || ^6.0.0). Remove this rule once it does.",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
+}
