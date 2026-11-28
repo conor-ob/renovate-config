@@ -2,7 +2,7 @@
   "name": "renovate-config",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.23.0",
+  "packageManager": "pnpm@11.28.13",
   "engines": {
     "node": ">=24"
   },
@@ -10,6 +10,6 @@
     "validate": "sh scripts/validate.sh"
   },
   "devDependencies": {
-    "renovate": "44.252.7"
+    "renovate": "44.257.5"
   }
 }
