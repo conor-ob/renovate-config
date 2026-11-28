@@ -27,7 +27,7 @@ so each repo picks up a change here on its next Renovate run.
 | Preset | For | What it does |
 | --- | --- | --- |
 | `default` | Every repo | The baseline policy. Its rules and reasons are in hq's [Renovate baseline](https://github.com/conor-ob/hq/blob/main/docs/renovate.md#policy). |
-| `expo` | Expo apps | Expo and React Native patches grouped and auto-merged. Their minors and majors aren't offered. An SDK major waits on the Dashboard for approval. Packages the SDK pins (`react`, `react-native` and some native modules) and `typescript` majors never move on their own. |
+| `expo` | Expo apps | Expo and React Native patches grouped and auto-merged. Their minors and majors aren't offered. An SDK major waits on the Dashboard for approval. Packages the SDK pins (`react`, `react-native` and some native modules) and majors of `typescript`, `@types/react`, `@babel/*` and `@react-navigation/*` never move on their own. |
 | `storybook` | Storybook users | Every storybook package in one PR. |
 | `vite-plus` | vite-plus users | `vite-plus`, `@voidzero-dev/vite-plus-core` and the `vite: npm:@voidzero-dev/vite-plus-core@…` alias in one PR, majors included, with one 7-day cooldown. |
 | `library` | Published packages | Ranges only widen. `engines` is never touched, and `@types/node` majors are raised by hand. |

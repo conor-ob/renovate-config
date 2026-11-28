@@ -41,6 +41,24 @@
       "enabled": false
     },
     {
+      "description": "React types follow the React runtime, which the SDK pins, so their majors only move with an SDK upgrade.",
+      "matchPackageNames": ["@types/react", "@types/react-dom"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Babel majors only move with an SDK upgrade, since babel-preset-expo has to support them first.",
+      "matchPackageNames": ["@babel/*"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "React Navigation majors only move with an SDK upgrade, since expo-router is built on a specific major.",
+      "matchPackageNames": ["@react-navigation/*"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
       "description": "TypeScript majors only move with an SDK upgrade.",
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major"],
